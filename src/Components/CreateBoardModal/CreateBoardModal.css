@@ -1,0 +1,176 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, 0.65);
+
+  z-index: 1000;
+}
+
+.create-board-modal {
+  width: 100%;
+  max-width: 480px;
+
+  padding: 26px;
+
+  background-color: #202124;
+  border: 1px solid #383a3f;
+  border-radius: 12px;
+
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+}
+
+.modal-header h2 {
+  color: #f1f3f5;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  background-color: transparent;
+  color: #9da1a8;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: #2b2d31;
+  color: #ffffff;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  color: #c7cad0;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border: 1px solid #45484e;
+  border-radius: 7px;
+
+  outline: none;
+
+  background-color: #191a1d;
+  color: #f1f3f5;
+
+  font-size: 14px;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #70747b;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #3b82f6;
+
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+.cancel-button,
+.submit-button {
+  padding: 10px 16px;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cancel-button {
+  border: 1px solid #45484e;
+
+  background-color: transparent;
+  color: #b7bac1;
+}
+
+.cancel-button:hover {
+  background-color: #2b2d31;
+  color: #ffffff;
+}
+
+.submit-button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.submit-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 600px) {
+  .create-board-modal {
+    padding: 22px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .submit-button {
+    width: 100%;
+  }
+}
