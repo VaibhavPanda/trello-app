@@ -1,60 +1,496 @@
 .board-card {
-  min-height: 170px;
+  position: relative;
 
-  padding: 20px;
+  width: 100%;
+  min-height: 178px;
+
+  padding: 21px;
 
   display: flex;
   flex-direction: column;
 
-  background-color: #202124;
-  border: 1px solid #34363a;
-  border-radius: 10px;
+  overflow: visible;
+
+  background:
+    linear-gradient(145deg,
+      rgba(31, 36, 44, 0.96),
+      rgba(22, 26, 32, 0.96));
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 13px;
 
   cursor: pointer;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
 
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
-    background-color 0.2s ease;
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
+/* --------------------------------------------------
+   TOP ACCENT
+-------------------------------------------------- */
+
+.board-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background:
+    linear-gradient(90deg,
+      #4f8df7,
+      #6366f1,
+      transparent);
+
+  border-radius: 13px 13px 0 0;
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+
+  pointer-events: none;
+}
+
+/* --------------------------------------------------
+   CARD HOVER
+-------------------------------------------------- */
 
 .board-card:hover {
   transform: translateY(-3px);
 
-  background-color: #25272b;
-  border-color: #4a4d53;
+  border-color: rgba(96, 165, 250, 0.3);
+
+  background:
+    linear-gradient(145deg,
+      rgba(37, 43, 53, 0.98),
+      rgba(25, 29, 36, 0.98));
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(59, 130, 246, 0.035);
 }
 
-.board-card-title {
-  margin-bottom: 9px;
+.board-card:hover::before {
+  opacity: 1;
+}
 
-  color: #f1f3f5;
+/* Keep menu above neighboring cards */
+
+.board-card.board-menu-open {
+  z-index: 100;
+}
+
+/* --------------------------------------------------
+   HEADER
+-------------------------------------------------- */
+
+.board-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+/* --------------------------------------------------
+   TITLE
+-------------------------------------------------- */
+
+.board-card-title {
+  min-width: 0;
+
+  margin: 0 0 9px;
+
+  color: #f5f7fa;
+
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 650;
+
+  line-height: 1.3;
+
+  letter-spacing: -0.25px;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+/* --------------------------------------------------
+   DESCRIPTION
+-------------------------------------------------- */
+
 .board-card-description {
-  margin-bottom: 20px;
+  margin: 0 0 20px;
 
-  color: #9da1a8;
+  color: #929aa8;
 
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.55;
 
   display: -webkit-box;
+
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 
   overflow: hidden;
 }
 
+/* --------------------------------------------------
+   CARD COUNT
+-------------------------------------------------- */
+
 .board-card-count {
   margin-top: auto;
 
-  color: #737780;
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  color: #7d8796;
+
+  font-size: 12px;
+  font-weight: 550;
+
+  line-height: 1;
+
+  letter-spacing: 0.05px;
+}
+
+/* Small visual indicator before "5 cards" */
+
+.board-card-count::before {
+  content: "";
+
+  width: 5px;
+  height: 5px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background: #4f8df7;
+
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------
+   THREE-DOT MENU
+-------------------------------------------------- */
+
+.board-menu-container {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.board-menu-button {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #7f8896;
+
+  font-size: 17px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.board-menu-button:hover {
+  background: rgba(255, 255, 255, 0.075);
+
+  color: #f5f7fa;
+}
+
+/* --------------------------------------------------
+   DROPDOWN MENU
+-------------------------------------------------- */
+
+.board-menu {
+  position: absolute;
+
+  top: 32px;
+  right: 0;
+
+  z-index: 1000;
+
+  width: 126px;
+
+  padding: 5px;
+
+  background: #20242b;
+
+  border: 1px solid #373e4a;
+  border-radius: 9px;
+
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+
+  animation: board-menu-in 0.14s ease;
+}
+
+.board-menu button {
+  width: 100%;
+
+  min-height: 32px;
+
+  padding: 0 9px;
+
+  display: flex;
+  align-items: center;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #bdc4ce;
+
+  text-align: left;
+
+  font-size: 11.5px;
+  font-weight: 550;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.board-menu button:hover {
+  background: rgba(255, 255, 255, 0.07);
+
+  color: #ffffff;
+}
+
+.board-menu .board-delete-option:hover {
+  background: rgba(239, 68, 68, 0.1);
+
+  color: #f87171;
+}
+
+.board-menu button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------
+   EDIT FORM
+-------------------------------------------------- */
+
+.board-edit-form {
+  cursor: default;
+
+  overflow: hidden;
+}
+
+.board-edit-form:hover {
+  transform: none;
+
+  border-color: rgba(255, 255, 255, 0.09);
+
+  background:
+    linear-gradient(145deg,
+      rgba(31, 36, 44, 0.96),
+      rgba(22, 26, 32, 0.96));
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.board-edit-form:hover::before {
+  opacity: 0;
+}
+
+/* --------------------------------------------------
+   EDIT INPUTS
+-------------------------------------------------- */
+
+.board-edit-form input,
+.board-edit-form textarea {
+  width: 100%;
+
+  margin: 0 0 9px;
+
+  padding: 9px 10px;
+
+  border: 1px solid #363e4a;
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #111419;
+
+  color: #f1f4f8;
+
+  font-size: 12px;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.board-edit-form input::placeholder,
+.board-edit-form textarea::placeholder {
+  color: #626b79;
+}
+
+.board-edit-form input:focus,
+.board-edit-form textarea:focus {
+  border-color: #4f8df7;
+
+  background: #13171d;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* --------------------------------------------------
+   EDIT ACTIONS
+-------------------------------------------------- */
+
+.board-edit-actions {
+  display: flex;
+
+  gap: 7px;
+}
+
+.board-edit-actions button {
+  min-height: 30px;
+
+  padding: 0 11px;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+/* Save */
+
+.board-save-button {
+  background: #3b82f6;
+
+  color: #ffffff;
+}
+
+.board-save-button:hover {
+  background: #2563eb;
+
+  transform: translateY(-1px);
+}
+
+/* Cancel */
+
+.board-cancel-button {
+  border: 1px solid #373e49;
+
+  background: transparent;
+
+  color: #aeb6c2;
+}
+
+.board-cancel-button:hover {
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #ffffff;
+
+  border-color: #454c58;
+}
+
+.board-edit-actions button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------
+   MENU ANIMATION
+-------------------------------------------------- */
+
+@keyframes board-menu-in {
+  from {
+    opacity: 0;
+
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------
+   MOBILE
+-------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .board-card {
+    min-height: 165px;
+
+    padding: 18px;
+  }
+
+  .board-card-title {
+    font-size: 16px;
+  }
+
+  .board-card-description {
+    font-size: 12.5px;
+
+    margin-bottom: 18px;
+  }
+
+  .board-card-count {
+    font-size: 11.5px;
+  }
+
+  .board-menu-button {
+    width: 27px;
+    height: 27px;
+  }
 }

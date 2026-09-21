@@ -1,42 +1,133 @@
 .board-page {
-  min-height: calc(100vh - 60px);
+  position: relative;
 
-  padding: 32px;
+  min-height: calc(100vh - 64px);
 
-  background-color: #191a1d;
+  padding: 34px 32px 40px;
 
-  overflow-x: auto;
+  overflow: hidden;
+
+  background: transparent;
 }
 
+/* --------------------------------------------------
+   BOARD BACKGROUND
+-------------------------------------------------- */
+
+.board-page::before {
+  content: "";
+
+  position: fixed;
+
+  top: 64px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  z-index: -1;
+
+  background-image:
+    linear-gradient(rgba(7, 10, 15, 0.68),
+      rgba(7, 10, 15, 0.74)),
+    url("https://images.unsplash.com/vector-1759232367520-e938145ea373?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2Vic2l0ZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D");
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  pointer-events: none;
+}
+
+/* --------------------------------------------------
+   BOARD HEADER
+-------------------------------------------------- */
+
 .board-header {
-  margin-bottom: 28px;
+  position: relative;
+
+  margin-bottom: 25px;
+
+  padding: 3px 2px;
 }
 
 .board-header h1 {
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 
-  color: #f1f3f5;
+  color: #f5f7fa;
 
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 720;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.7px;
 }
 
 .board-header p {
-  color: #969aa1;
+  max-width: 700px;
 
-  font-size: 14px;
+  color: #8f98a7;
+
+  font-size: 13px;
+
+  line-height: 1.55;
 }
 
+/* --------------------------------------------------
+   BOARD LIST WORKSPACE
+-------------------------------------------------- */
+
 .board-lists {
+  position: relative;
+
   display: flex;
   align-items: flex-start;
 
-  gap: 14px;
+  gap: 16px;
+
+  width: 100%;
+  min-width: 0;
 
   overflow-x: auto;
+  overflow-y: hidden;
 
-  padding-bottom: 20px;
+  padding: 6px 4px 22px;
+
+  overscroll-behavior-x: contain;
+
+  scroll-behavior: smooth;
 }
+
+/* Horizontal scrollbar */
+
+.board-lists::-webkit-scrollbar {
+  height: 7px;
+}
+
+.board-lists::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.board-lists::-webkit-scrollbar-thumb {
+  background: #2c323c;
+
+  border-radius: 999px;
+}
+
+.board-lists::-webkit-scrollbar-thumb:hover {
+  background: #414854;
+}
+
+/* Firefox */
+
+.board-lists {
+  scrollbar-width: thin;
+  scrollbar-color: #2c323c transparent;
+}
+
+/* --------------------------------------------------
+   ADD LIST BUTTON
+-------------------------------------------------- */
 
 .add-list-button {
   width: 280px;
@@ -46,47 +137,48 @@
 
   padding: 12px 16px;
 
-  border: 1px dashed #45484e;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
 
-  background-color: transparent;
-  color: #969aa1;
+  border: 1px dashed #3b424e;
+
+  border-radius: 11px;
+
+  background: rgba(18, 21, 27, 0.72);
+
+  color: #9da6b4;
 
   text-align: left;
 
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 550;
 
   cursor: pointer;
 
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .add-list-button:hover {
-  background-color: #202124;
-  border-color: #62666e;
-  color: #f1f3f5;
+  background: rgba(28, 34, 43, 0.9);
+
+  border-color: rgba(96, 165, 250, 0.42);
+
+  color: #f5f7fa;
+
+  transform: translateY(-1px);
 }
 
-/* ---------- Responsive ---------- */
-
-@media (max-width: 600px) {
-  .board-page {
-    padding: 24px 16px;
-  }
-
-  .board-header h1 {
-    font-size: 24px;
-  }
-
-  .board-list,
-  .add-list-button {
-    width: 260px;
-    min-width: 260px;
-  }
+.add-list-button:active {
+  transform: translateY(0);
 }
+
+/* --------------------------------------------------
+   ADD LIST FORM
+-------------------------------------------------- */
 
 .add-list-form {
   width: 280px;
@@ -94,9 +186,18 @@
 
   padding: 12px;
 
-  background-color: #202124;
-  border: 1px solid #34363a;
-  border-radius: 10px;
+  background:
+    linear-gradient(145deg,
+      rgba(30, 35, 43, 0.97),
+      rgba(22, 26, 32, 0.97));
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
 }
 
 .add-list-form input {
@@ -104,25 +205,40 @@
 
   padding: 10px 11px;
 
-  border: 1px solid #45484e;
-  border-radius: 6px;
+  border: 1px solid #363d49;
+
+  border-radius: 7px;
 
   outline: none;
 
-  background-color: #191a1d;
-  color: #f1f3f5;
+  background: #111419;
 
-  font-size: 14px;
+  color: #f1f4f8;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .add-list-form input::placeholder {
-  color: #70747b;
+  color: #626b78;
 }
 
 .add-list-form input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  border-color: #4f8df7;
+
+  background: #13171d;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.13);
 }
+
+/* --------------------------------------------------
+   ADD LIST ACTIONS
+-------------------------------------------------- */
 
 .add-list-actions {
   display: flex;
@@ -134,38 +250,152 @@
 }
 
 .confirm-list-button {
-  padding: 8px 12px;
+  min-height: 32px;
 
-  border-radius: 6px;
+  padding: 0 12px;
 
-  background-color: #2563eb;
+  border-radius: 7px;
+
+  background:
+    linear-gradient(135deg,
+      #3b82f6,
+      #4f46e5);
+
   color: #ffffff;
 
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 650;
 
   cursor: pointer;
+
+  box-shadow:
+    0 5px 12px rgba(37, 99, 235, 0.16);
+
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .confirm-list-button:hover {
-  background-color: #1d4ed8;
+  filter: brightness(1.07);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 16px rgba(37, 99, 235, 0.22);
+}
+
+.confirm-list-button:active {
+  transform: translateY(0);
 }
 
 .cancel-list-button {
   width: 32px;
   height: 32px;
 
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  background-color: transparent;
-  color: #969aa1;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #8e97a5;
 
   font-size: 20px;
+  line-height: 1;
 
   cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .cancel-list-button:hover {
-  background-color: #2b2d31;
+  background: rgba(255, 255, 255, 0.07);
+
   color: #ffffff;
+}
+
+/* --------------------------------------------------
+   DRAG OVERLAY
+-------------------------------------------------- */
+
+.drag-overlay-card {
+  cursor: grabbing;
+
+  transform: rotate(2deg);
+
+  opacity: 0.97;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(96, 165, 250, 0.14);
+}
+
+/* --------------------------------------------------
+   MOBILE
+-------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .board-page {
+    min-height: calc(100vh - 58px);
+
+    padding: 24px 14px 28px;
+  }
+
+  .board-page::before {
+    top: 58px;
+
+    background-image:
+      linear-gradient(rgba(7, 10, 15, 0.72),
+        rgba(7, 10, 15, 0.78)),
+      url("https://images.unsplash.com/vector-1759232367520-e938145ea373?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2Vic2l0ZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D");
+  }
+
+  .board-header {
+    margin-bottom: 20px;
+
+    padding: 2px;
+  }
+
+  .board-header h1 {
+    font-size: 24px;
+
+    letter-spacing: -0.55px;
+  }
+
+  .board-header p {
+    font-size: 12px;
+  }
+
+  .board-lists {
+    gap: 12px;
+
+    padding: 4px 2px 18px;
+  }
+
+  .add-list-button,
+  .add-list-form {
+    width: 85vw;
+    min-width: 85vw;
+  }
+}
+
+@media (max-width: 380px) {
+  .board-page {
+    padding-right: 11px;
+    padding-left: 11px;
+  }
+
+  .board-header h1 {
+    font-size: 22px;
+  }
+
+  .board-lists {
+    gap: 10px;
+  }
 }

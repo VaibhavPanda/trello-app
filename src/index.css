@@ -4,16 +4,45 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
+html {
   min-height: 100%;
+  background: #0b0e13;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #191a1d;
-  color: #e6e8eb;
+  min-height: 100vh;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #e7eaf0;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+
+  background-color: #0b0e13;
+
+  background-image:
+    linear-gradient(rgba(7, 10, 15, 0.66),
+      rgba(7, 10, 15, 0.72)),
+    url("https://images.unsplash.com/photo-1671347020855-8f35d210ee9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2Vic2l0ZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D");
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 button,
@@ -23,9 +52,55 @@ textarea {
 }
 
 button {
-  border: none;
+  border: 0;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input,
+textarea {
+  color: inherit;
 }
 
 a {
   color: inherit;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.35);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2c313b;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #414752;
+}
+
+@media (max-width: 600px) {
+  body {
+    background-attachment: scroll;
+  }
 }

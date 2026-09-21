@@ -1,62 +1,502 @@
 .board-list {
+  position: relative;
+
+  flex: 0 0 280px;
+
   width: 280px;
   min-width: 280px;
 
-  min-height: 180px;
-
-  padding: 12px;
-
-  background-color: #202124;
-  border: 1px solid #34363a;
-  border-radius: 10px;
-
   display: flex;
   flex-direction: column;
+
+  max-height: calc(100vh - 184px);
+
+  padding: 11px;
+
+  background:
+    linear-gradient(145deg,
+      rgba(31, 36, 44, 0.97),
+      rgba(23, 27, 33, 0.97));
+
+  border: 1px solid rgba(255, 255, 255, 0.085);
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 9px 26px rgba(0, 0, 0, 0.17),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+/* --------------------------------------------------
+   LIST HEADER
+-------------------------------------------------- */
+
 .board-list-header {
-  padding: 4px 4px 12px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 36px;
+
+  margin-bottom: 7px;
+
+  padding: 0 2px;
 }
 
 .board-list-title {
-  color: #f1f3f5;
+  min-width: 0;
 
-  font-size: 15px;
-  font-weight: 600;
+  color: #edf0f5;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.05px;
 
   word-break: break-word;
 }
 
-.board-list-cards {
-  min-height: 60px;
+/* --------------------------------------------------
+   LIST MENU
+-------------------------------------------------- */
 
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.list-menu-container {
+  position: relative;
+
+  flex-shrink: 0;
 }
 
-.add-card-button {
-  margin-top: 12px;
+.list-menu-button {
+  width: 30px;
+  height: 30px;
 
-  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  border-radius: 6px;
+  padding: 0;
 
-  background-color: transparent;
-  color: #969aa1;
+  border-radius: 7px;
 
-  text-align: left;
+  background: transparent;
 
-  font-size: 14px;
+  color: #818a98;
+
+  font-size: 19px;
+  line-height: 1;
 
   cursor: pointer;
 
   transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.list-menu-button:hover {
+  background: rgba(255, 255, 255, 0.07);
+
+  color: #ffffff;
+}
+
+.list-menu {
+  position: absolute;
+
+  top: 34px;
+  right: 0;
+
+  z-index: 100;
+
+  width: 135px;
+
+  padding: 5px;
+
+  background: #20242b;
+
+  border: 1px solid #373e4a;
+
+  border-radius: 9px;
+
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+
+  animation: list-menu-in 0.14s ease;
+}
+
+.list-menu button {
+  width: 100%;
+
+  min-height: 32px;
+
+  padding: 0 10px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #bdc4ce;
+
+  text-align: left;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.list-menu button:hover {
+  background: rgba(255, 255, 255, 0.07);
+
+  color: #ffffff;
+}
+
+/* --------------------------------------------------
+   CARDS AREA
+-------------------------------------------------- */
+
+.board-list-cards {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+
+  min-height: 10px;
+
+  overflow: visible;
+
+  padding: 3px 3px 4px;
+
+  overscroll-behavior: contain;
+
+  scrollbar-width: thin;
+
+  scrollbar-color: #303640 transparent;
+}
+
+.board-list-cards::-webkit-scrollbar {
+  width: 5px;
+}
+
+.board-list-cards::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.board-list-cards::-webkit-scrollbar-thumb {
+  background: #303640;
+
+  border-radius: 999px;
+}
+
+.board-list-cards::-webkit-scrollbar-thumb:hover {
+  background: #424956;
+}
+
+/* --------------------------------------------------
+   EMPTY LIST
+-------------------------------------------------- */
+
+.board-list-cards:empty {
+  min-height: 30px;
+}
+
+/* --------------------------------------------------
+   ADD CARD BUTTON
+-------------------------------------------------- */
+
+.add-card-button {
+  width: 100%;
+
+  margin-top: 8px;
+
+  padding: 8px 9px;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #858e9d;
+
+  text-align: left;
+
+  font-size: 12px;
+  font-weight: 550;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .add-card-button:hover {
-  background-color: #2b2d31;
-  color: #f1f3f5;
+  background: rgba(255, 255, 255, 0.055);
+
+  color: #e4e8ee;
+}
+
+/* --------------------------------------------------
+   EDIT LIST
+-------------------------------------------------- */
+
+.edit-list-form {
+  width: 100%;
+}
+
+.edit-list-form input {
+  width: 100%;
+
+  padding: 8px 9px;
+
+  border: 1px solid #39414d;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #111419;
+
+  color: #f1f4f8;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.edit-list-form input::placeholder {
+  color: #626b78;
+}
+
+.edit-list-form input:focus {
+  border-color: #4f8df7;
+
+  background: #13171d;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.edit-list-actions {
+  display: flex;
+
+  gap: 7px;
+
+  margin-top: 8px;
+}
+
+.edit-list-actions button {
+  min-height: 30px;
+
+  padding: 0 10px;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.edit-list-actions button[type="submit"] {
+  background: #3b82f6;
+
+  color: #ffffff;
+}
+
+.edit-list-actions button[type="submit"]:hover {
+  background: #2563eb;
+}
+
+.edit-list-actions button[type="button"] {
+  border: 1px solid #373e49;
+
+  background: transparent;
+
+  color: #aeb6c2;
+}
+
+.edit-list-actions button[type="button"]:hover {
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #ffffff;
+
+  border-color: #454c58;
+}
+
+.edit-list-actions button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------
+   ADD CARD FORM
+-------------------------------------------------- */
+
+.add-card-form {
+  margin-top: 8px;
+
+  padding: 2px;
+}
+
+.add-card-form input,
+.add-card-form textarea {
+  width: 100%;
+
+  margin-bottom: 8px;
+
+  padding: 9px 10px;
+
+  border: 1px solid #363e4a;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #111419;
+
+  color: #f1f4f8;
+
+  font-size: 12px;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.add-card-form input::placeholder,
+.add-card-form textarea::placeholder {
+  color: #626b78;
+}
+
+.add-card-form input:focus,
+.add-card-form textarea:focus {
+  border-color: #4f8df7;
+
+  background: #13171d;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.add-card-actions {
+  display: flex;
+
+  gap: 8px;
+}
+
+.confirm-card-button,
+.cancel-card-button {
+  min-height: 30px;
+
+  padding: 0 11px;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.confirm-card-button {
+  background: #3b82f6;
+
+  color: #ffffff;
+}
+
+.confirm-card-button:hover {
+  background: #2563eb;
+
+  transform: translateY(-1px);
+}
+
+.cancel-card-button {
+  border: 1px solid #373e49;
+
+  background: transparent;
+
+  color: #aeb6c2;
+}
+
+.cancel-card-button:hover {
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #ffffff;
+
+  border-color: #454c58;
+}
+
+/* --------------------------------------------------
+   MENU ANIMATION
+-------------------------------------------------- */
+
+@keyframes list-menu-in {
+  from {
+    opacity: 0;
+
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------
+   MOBILE
+-------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .board-list {
+    flex-basis: 85vw;
+
+    width: 85vw;
+    min-width: 85vw;
+
+    max-height: calc(100vh - 165px);
+  }
+}
+
+@media (max-width: 380px) {
+  .board-list {
+    flex-basis: 88vw;
+
+    width: 88vw;
+    min-width: 88vw;
+  }
 }

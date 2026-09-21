@@ -1,6 +1,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
+  z-index: 1000;
 
   display: flex;
   align-items: center;
@@ -8,22 +9,29 @@
 
   padding: 20px;
 
-  background-color: rgba(0, 0, 0, 0.65);
+  background: rgba(4, 6, 10, 0.72);
 
-  z-index: 1000;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 }
 
 .create-board-modal {
   width: 100%;
   max-width: 480px;
+  padding: 28px;
 
-  padding: 26px;
+  background:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.012)),
+    #191c22;
 
-  background-color: #202124;
-  border: 1px solid #383a3f;
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 15px;
 
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 
 .modal-header {
@@ -31,13 +39,15 @@
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 24px;
+  margin-bottom: 25px;
 }
 
 .modal-header h2 {
-  color: #f1f3f5;
+  color: #f5f7fa;
+
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 650;
+  letter-spacing: -0.2px;
 }
 
 .modal-close {
@@ -48,12 +58,13 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 6px;
+  border-radius: 8px;
 
-  background-color: transparent;
-  color: #9da1a8;
+  background: transparent;
+  color: #8e96a3;
 
-  font-size: 24px;
+  font-size: 22px;
+  line-height: 1;
 
   cursor: pointer;
 
@@ -63,22 +74,22 @@
 }
 
 .modal-close:hover {
-  background-color: #2b2d31;
+  background: rgba(255, 255, 255, 0.07);
   color: #ffffff;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
 
   margin-bottom: 18px;
 }
 
 .form-group label {
-  color: #c7cad0;
+  color: #c4cad4;
 
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -88,33 +99,39 @@
 
   padding: 11px 12px;
 
-  border: 1px solid #45484e;
-  border-radius: 7px;
+  border: 1px solid #343a46;
+  border-radius: 8px;
 
   outline: none;
 
-  background-color: #191a1d;
-  color: #f1f3f5;
+  background: #111419;
+  color: #f2f4f7;
 
-  font-size: 14px;
+  font-size: 13px;
 
   resize: vertical;
 
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: #70747b;
+.form-group input:hover,
+.form-group textarea:hover {
+  border-color: #454c59;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #3b82f6;
+  border-color: #4f8df7;
+  background: #13171d;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
+}
 
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #646c79;
 }
 
 .modal-actions {
@@ -122,47 +139,66 @@
   justify-content: flex-end;
   gap: 10px;
 
-  margin-top: 24px;
+  margin-top: 25px;
 }
 
 .cancel-button,
 .submit-button {
   padding: 10px 16px;
 
-  border-radius: 7px;
+  border-radius: 8px;
 
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 650;
 
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .cancel-button {
-  border: 1px solid #45484e;
+  border: 1px solid #373d48;
 
-  background-color: transparent;
-  color: #b7bac1;
+  background: transparent;
+  color: #aeb5c1;
 }
 
 .cancel-button:hover {
-  background-color: #2b2d31;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #4b5260;
   color: #ffffff;
 }
 
 .submit-button {
-  background-color: #2563eb;
+  background: linear-gradient(135deg, #3b82f6, #4f46e5);
   color: #ffffff;
+
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.2);
 }
 
 .submit-button:hover {
-  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(59, 130, 246, 0.28);
 }
 
-/* ---------- Responsive ---------- */
+.submit-button:active,
+.cancel-button:active {
+  transform: translateY(0);
+}
 
 @media (max-width: 600px) {
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 12px;
+  }
+
   .create-board-modal {
     padding: 22px;
+    border-radius: 16px;
   }
 
   .modal-actions {

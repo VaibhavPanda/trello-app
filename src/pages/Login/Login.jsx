@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <main className="login-page">
       <div className="login-card">
-        <div className="login-brand">panda</div>
+        <div className="login-brand">Trello-Clone</div>
         <h2>Welcome Back!</h2>
         <p>Sign in to Continue</p>
         <button className="google-login-button" onClick={handleLogin}>
